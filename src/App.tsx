@@ -1,10 +1,18 @@
-import { useEffect, useState } from "react";
-import { Container, List, ListItem, ListItemText } from "@mui/material";
+import { Fragment, useEffect, useState } from "react";
+import {
+  Avatar,
+  Box,
+  Container,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+} from "@mui/material";
 
-import logo from "./logo.svg";
 import { Company } from "./interfaces/Company";
 import { instance } from "./api/CompanyAPI";
 import { SearchBox } from "./components/SearchBox";
+import { AppBar } from "./components/AppBar";
 
 function App() {
   const [companies, setCompanies] = useState<Company[]>([]);
@@ -19,21 +27,31 @@ function App() {
   }, []);
 
   return (
-    <Container maxWidth="lg">
-      <header>
-        <img src={logo} alt="logo" style={{ height: "50px" }} />
-      </header>
-      <SearchBox />
-      <main>
-        <List>
-          {companies.map((company) => (
-            <ListItem key={company.id} disablePadding>
-              <ListItemText primary={company.name} />
-            </ListItem>
-          ))}
-        </List>
-      </main>
-    </Container>
+    <Fragment>
+      <AppBar />
+      <Container maxWidth="lg" disableGutters>
+        <SearchBox />
+        <main>
+          <Box
+            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+          >
+            <List>
+              {companies.map((company) => (
+                <ListItem key={company.id}>
+                  <ListItemAvatar>
+                    <Avatar alt={`${company.name} logo`} src={company.logo} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={company.name}
+                    secondary={company.city}
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+        </main>
+      </Container>
+    </Fragment>
   );
 }
 
