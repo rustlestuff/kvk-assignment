@@ -1,18 +1,23 @@
+import { Box, Button, Container, List, TextField } from "@mui/material";
+
 import logo from "./logo.svg";
 
 function App() {
   return (
-    <div>
+    <Container maxWidth="lg">
       <header>
-        <img src={logo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
+        <img src={logo} alt="logo" style={{ height: "50px" }} />
       </header>
-    </div>
+      <Box component="section" display="flex" gap={1}>
+        <TextField type="search" name="search" id="search-input" size="small" />
+        <Button type="submit" variant="contained">
+          Zoeken
+        </Button>
+      </Box>
+      <main>
+        <List>Resultaten</List>
+      </main>
+    </Container>
   );
 }
 
