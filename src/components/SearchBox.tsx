@@ -1,7 +1,13 @@
-import { FC } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import { Box, Button, TextField } from "@mui/material";
 
-export const SearchBox: FC = () => {
+interface SearchBoxProps {
+  value: string;
+  onChange: Dispatch<SetStateAction<string>>;
+  search: () => Promise<void>;
+}
+
+export const SearchBox: FC<SearchBoxProps> = ({ value, onChange, search }) => {
   return (
     <Box
       component="section"
@@ -13,12 +19,14 @@ export const SearchBox: FC = () => {
     >
       <TextField
         type="search"
-        name="search"
+        name="query"
         id="search-input"
         size="small"
         fullWidth
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
       />
-      <Button type="submit" variant="contained">
+      <Button type="submit" variant="contained" onClick={search}>
         Zoeken
       </Button>
     </Box>
