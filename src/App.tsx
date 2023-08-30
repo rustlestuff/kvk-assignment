@@ -1,6 +1,7 @@
-import { Box, Button, Container, List, TextField } from "@mui/material";
+import { Container, List } from "@mui/material";
 
 import logo from "./logo.svg";
+import { SearchBox } from "./components/SearchBox";
 
 function App() {
   return (
@@ -8,12 +9,7 @@ function App() {
       <header>
         <img src={logo} alt="logo" style={{ height: "50px" }} />
       </header>
-      <Box component="section" display="flex" gap={1}>
-        <TextField type="search" name="search" id="search-input" size="small" />
-        <Button type="submit" variant="contained">
-          Zoeken
-        </Button>
-      </Box>
+      <SearchBox />
       <main>
         <List>Resultaten</List>
       </main>
